@@ -1,0 +1,43 @@
+h1 {
+    text-align: center;
+}
+
+.news-list {
+    padding-left: 0;
+}
+
+.news-list li:first-child {
+    border-top: 1px solid #aaa;
+}
+
+.news-list li {
+    list-style-type: none;
+    padding: 5px;
+    border-bottom: 1px solid #aaa;
+}
+
+.news-list li:nth-child(even) {
+    background-color: #ddd;
+}
+
+.right {
+    text-align: right;
+}
+
+.add-news {
+    float: right;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.modal-header.tabs{
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+@media (max-width:992px) {
+    .add-news {
+        top: 0;
+    }
+}

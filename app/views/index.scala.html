@@ -1,0 +1,91 @@
+@import org.joda.time.format.DateTimeFormat
+@import org.joda.time.DateTime
+@(news: List[MesNews])
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        @* Here's where we render the page title `String`. *@
+        <title>Mes News Database</title>
+        <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/main.css")">
+        <link rel="shortcut icon" type="image/png" href="@routes.Assets.versioned("images/favicon.png")">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+        <script src="@routes.Assets.versioned("javascripts/hello.js")" type="text/javascript"></script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>Mes News Database</h1>
+                    <button type="button" class="btn btn-primary add-news" data-toggle="modal" data-target="#addNews">
+                        Add news
+                    </button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <ul class="news-list">
+                    @for(n <- news) {
+                        <li>
+                            <h3>@n.title <i>(by @n.author)</i></h3>
+                            <h4>@DateTimeFormat.mediumDateTime().print(new DateTime(n.date))</h4>
+                            Source: <a href="@n.source">@n.source</a>
+                        </li>
+                    }
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="addNews" tabindex="-1" role="dialog" aria-labelledby="addNewsLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header tabs">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active"><a href="#text-news" aria-controls="text-news" role="tab" data-toggle="tab">Text news</a></li>
+                            <li role="presentation"><a href="#photo-news" aria-controls="photo-news" role="tab" data-toggle="tab">Photo news</a></li>
+                        </ul>
+                    </div>
+                    <form id="add-news" method="POST" action="@routes.MesNewsController.addNews()">
+                    <div class="modal-body">
+                        <div>
+                            <div class="tab-content">
+                                <div role="tabpanel" class="tab-pane active" id="text-news">
+                                    <h3>Create a text news</h3>
+                                </div>
+                                <div role="tabpanel" class="tab-pane" id="photo-news">
+                                    <h3>Create a photo news</h3>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <input class="form-control" type="text" name="title" placeholder="News title" required/>
+                                        </div>
+                                        <div class="form-group">
+                                            <input class="form-control" type="datetime-local" name="date" placeholder="News date" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <input class="form-control" type="text" name="author" placeholder="News author" required/>
+                                        </div>
+                                        <div class="form-group">
+                                            <input class="form-control" type="url" name="source" placeholder="News source" required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Add News</button>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
