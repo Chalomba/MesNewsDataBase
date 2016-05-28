@@ -1,49 +1,36 @@
-This is your new Play application
-=================================
+To see the Demo-Application deployed on Heroku:
+==========================================
+Go to http://mesnews.herokuapp.com
 
-This file will be packaged with your application when using `activator dist`.
 
-There are several demonstration files available in this template.
-
-Controllers
-===========
-
-- HomeController.java:
-
-  Shows how to handle simple HTTP requests.
-
-- AsyncController.java:
-
-  Shows how to do asynchronous programming when handling a request.
-
-- CountController.java:
-
-  Shows how to inject a component into a controller and use the component when
-  handling requests.
-
-Components
-==========
-
-- Module.java:
-
-  Shows how to use Guice to bind all the components needed by your application.
-
-- Counter.java:
-
-  An example of a component that contains state, in this case a simple counter.
-
-- ApplicationTimer.java:
-
-  An example of a component that starts when the application starts and stops
-  when the application stops.
-
-Filters
-=======
-
-- Filters.java:
-
-  Creates the list of HTTP filters used by your application.
-
-- ExampleFilter.java
-
-  A simple filter that adds a header to every response.
+To build and run application locally
+==========================================
+- Install JDK 8: http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
+- Install GIT: https://git-scm.com/downloads
+- Download Play 2.5.3 from: https://www.playframework.com/download
+- Download postgres app: http://postgresapp.com/
+- Open the file */MesNewsDataBase/conf/application.conf*, go to the line 347 and change the user name in default.url to your user name (on mac this is your home folder name)
+```
+default.url = "jdbc:postgresql://localhost:5432/postgres?user=<YOURUSERNAME>"
+```
+- Run postgres app and click open psql.
+- In the opened terminal with psql run the SQL-script to create the MesNews table in the local database:
+```
+create table MesNews (
+    id serial not null,
+    title varchar(255),
+    author varchar(255),
+    source varchar(255),
+    date bigint
+);
+```
+- Add activator to your PATH: https://www.playframework.com/documentation/2.5.x/Installing
+- Checkout project using git: https://github.com/Chalomba/MesNewsDataBase.git
+- Run the terminal and cd into the projects.
+- In the terminal type: "activator run" wait for all dependencies to be loaded and project will start.
+- When it will be ready you will see the message
+```
+(Server started, use Ctrl+D to stop and go back to the console...)
+```
+- Open browser and navigate to: http://localhost:9000/
+- Profit!
