@@ -28,12 +28,23 @@ public class MesNewsController extends Controller{
         this.jpaApi = jpaApi;
     }
 
+    /**
+     * Reads a list of new from database and render it to the index page.
+     *
+     * @return
+     */
     @Transactional
     public Result index() {
         List<MesNews> news = (List<MesNews>) jpaApi.em().createNativeQuery("SELECT * FROM MesNews", MesNews.class).getResultList();
         return ok(index.render(news));
     }
 
+
+    /**
+     * Create News from the data passed from the view and save it to the database.
+     *
+     * @return
+     */
     @Transactional
     public Result addNews() {
         DynamicForm requestData = formFactory.form().bindFromRequest();
