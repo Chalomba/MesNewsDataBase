@@ -2,7 +2,6 @@ To see the Demo-Application deployed on Heroku:
 ==========================================
 Go to http://mesnews.herokuapp.com
 
-
 To build and run application locally
 ==========================================
 - Install JDK 8: http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html
@@ -10,11 +9,14 @@ To build and run application locally
 - Download Play 2.5.3 from: https://www.playframework.com/download
 - Download postgres app: http://postgresapp.com/
 - Open the file */MesNewsDataBase/conf/application.conf*, go to the line 347 and change the user name in default.url to your user name (on mac this is your home folder name)
+
 ```
 default.url = "jdbc:postgresql://localhost:5432/postgres?user=<YOURUSERNAME>"
 ```
+
 - Run postgres app and click open psql.
 - In the opened terminal with psql run the SQL-script to create the MesNews table in the local database:
+
 ```
 create table MesNews (
     id serial not null,
@@ -24,13 +26,16 @@ create table MesNews (
     date bigint
 );
 ```
+
 - Add activator to your PATH: https://www.playframework.com/documentation/2.5.x/Installing
 - Checkout project using git: https://github.com/Chalomba/MesNewsDataBase.git
 - Run the terminal and cd into the projects.
 - In the terminal type: "activator run" wait for all dependencies to be loaded and project will start.
 - When it will be ready you will see the message
+
 ```
 (Server started, use Ctrl+D to stop and go back to the console...)
 ```
+
 - Open browser and navigate to: http://localhost:9000/
 - Profit!
